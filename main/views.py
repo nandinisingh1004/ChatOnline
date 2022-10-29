@@ -13,6 +13,7 @@ from users.models import Users
 from usergroups.models import GroupChats, Groups, GroupUsers
 from django.core.files.storage import FileSystemStorage
 
+
 @login_required
 def HomeView(request):
     finalchat = []

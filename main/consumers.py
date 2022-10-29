@@ -6,6 +6,7 @@ from .models import PersonalChats, Friends
 from usergroups.models import Groups, GroupChats, GroupUsers
 from django.contrib.auth.models import User
 
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.groupname = self.scope['url_route']['kwargs']['groupname']
