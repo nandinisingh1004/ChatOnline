@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Muli&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+</head>
+<body>
+    <nav class="navbar bg-custom navbar-expand-xs fixed-top navbar-default">
+        <div class="hamburger d-flex">
+            <svg class="arrow-left" width="2.2em" height="2.2em" viewBox="0 0 16 16" class="bi bi-arrow-left-short" fill="#fff">
+                <path fill-rule="evenodd" d="M7.854 4.646a.5.5 0 0 1 0 .708L5.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+                <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h6.5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            <div class="brand">GroupInfo</div>
+        </div>
+        
+    </nav>
+    <div class="user-div text-center">
+        
+        {% if img == '-'%}
+            <div class="user-image"></div>
+        {% else %}
+            <div class="user-image text-center"><img src = {{img}} class="userprofile"></div>
+        {% endif %}
+    </div>
+    <div>
+        <div class="restaurant d-flex">
+            <div class="res-photo text-center align-self-center">
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-joystick" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.106 15.553L.553 12.276A1 1 0 0 1 0 11.382V9.471a1 1 0 0 1 .606-.89L6 6.269v1.088L1 9.5l5.658 2.83a3 3 0 0 0 2.684 0L15 9.5l-5-2.143V6.27l5.394 2.312a1 1 0 0 1 .606.89v1.911a1 1 0 0 1-.553.894l-6.553 3.277a2 2 0 0 1-1.788 0z"/>
+                    <path fill-rule="evenodd" d="M7.5 9.5v-6h1v6h-1z"/>
+                    <path d="M10 9.75c0 .414-.895.75-2 .75s-2-.336-2-.75S6.895 9 8 9s2 .336 2 .75zM10 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                </svg>
+            </div>
+            <div class="res-data align-self-start">
+                <div class="res-name">{{name}}</div>
+                <div class="res-item-data">{{numparticipants}}</div>
+                
+            </div>
+        </div>
+        <div class="restaurant d-flex">
+            <div class="res-photo text-center align-self-center">
+                <svg class = 'icons' width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                    <circle cx="8" cy="4.5" r="1"/>
+                </svg>
+            </div>
+            <div class="res-data align-self-start">
+                <div class="res-name">About</div>
+                <div class="res-item-data">{{about}}</div>
+                
+            </div>
+        </div>
+        <div class="restaurant d-flex">
+            <div class="res-photo text-center align-self-center">
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                </svg>
+            </div>
+            <div class="res-data align-self-start">
+                <div class="res-name">Creator</div>
+                <div class="res-item-data">{{username}}</div>
+                
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+<script>
+    $(".arrow-left").click(function(){
+            window.location.pathname = '/main/';
+    })
+</script>
+</html>

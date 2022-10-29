@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="{% static 'css/search_single.css'%}">
+    <link rel="stylesheet" href="{% static 'css/search_multiple.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli" />
+</head>
+<body>
+    <div class='search-container d-flex justify-content-center'>
+        <div class="iconwrap d-flex">
+            
+            <svg class="fa-search align-self-center" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="#000">
+                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+            </svg>
+            <form action="{% url 'SearchView' %}" id = "searchform" class="form">
+                <input type="text" placeholder="Search by Username" class="align-self-center search-res" id="search">
+            </form>
+        </div>
+    </div>
+    <div class="add-participants d-flex">
+    </div>
+    <div class="caption">
+        Search results
+    </div>
+    <div class="search-result">
+    </div>
+    <div class = 'btncreate text-center'>
+        Create Group
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        window.addEventListener( "pageshow", function ( event ) {
+            var historyTraversal = event.persisted || 
+                                    ( typeof window.performance != "undefined" && 
+                                        window.performance.navigation.type === 2 );
+            if ( historyTraversal ) {
+                // Handle page restore.
+                window.location.pathname = '/main/'
+            }
+        });
+        const me = "{{me|escapejs}}";
+        var addedparticipants = []
+        function personal(e){
+            var track = 0;
+            var otheruser = $($(e).children($('.user-name'))[0]).text();
+            for(var i = 0; i < addedparticipants.length; i++){
+                if(addedparticipants[i] == otheruser){
+                    track = 1;
+                    break;
+                }
+            }
+            if(track == 0){
+                addedparticipants.push(otheruser)
+                $('.add-participants').append(
+                    '<div class="selected d-flex"><div class="delicon text-center" onclick="remove(this)"><i class="fa fa-times" aria-hidden="true"></i></div><span class="selected-name">' + otheruser + '</span></div>'
+                );
+            }
+            
+        }
+        function remove(e){
+            var elem = $($(e).siblings()[0]).text();
+            for(var i = 0; i < addedparticipants.length; i++){
+                if(addedparticipants[i] == elem){
+                    addedparticipants.splice(i, 1);
+                    break;
+                }
+            }
+            $(e).parent().remove();
+            console.log(addedparticipants);
+        }
+        $('#search').keyup(function(){
+            var name;
+            var spanelem;
+            const query = $(this).val();
+            $.ajax({
+                type : 'GET',
+                url : "{% url 'SearchView' %}",
+                data : {'search' : query},
+                success : function(response){
+                    var span;
+                    var t = 0;
+                    var queryset = JSON.parse(response['result']);
+                    $('.search-result').empty();
+                    for(var i = 0; i < queryset.length; i++){
+                        name = queryset[i]['fields']['username'];
+                        if(name == me){
+                            continue;
+                        }
+                        $('.search-result').append(
+                            '<div class="results d-flex"><span class="user-icon"></span><div class="user-data align-self-start" onclick="personal(this)"><div class="user-name">' + name + '</div><div class="mood">Hey there I am using SnakApp</div></div></div>'
+                        );
+                        if(queryset[i]['fields']['profilepic'] != '-'){
+                            var x = document.createElement("IMG");
+                            x.setAttribute("src", queryset[i]['fields']['profilepic']);
+                            spanelem = document.getElementsByClassName("user-icon")[t];
+                            spanelem.appendChild(x);
+                        }
+                        else{
+                            $($(".user-icon")[t]).css({'background' : '#e8e8e8'});
+                        }
+                        t = t + 1;
+                    }
+                    if(response['length'] == 0){
+                        $('.search-result').append(
+                            '<div class="no-users">No Users found with this username</div>' 
+                        );
+                        console.log('No items Matched!!');
+                    }
+                },
+                error : function(response){
+                    console.log("something bad");
+                }
+            });
+            
+        });
+        $('.btncreate').click(function(){
+            $.ajax({
+                type : 'GET',
+                url : '{% url "GroupParticipants" %}',
+                data : {'participants[]' : addedparticipants},
+                success :  function(response){
+                    console.log("Yo")
+                    window.location.pathname = 'main/group/detail'
+                },
+                error : function(response){
+                    console.log("something bad");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

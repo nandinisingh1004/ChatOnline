@@ -1,0 +1,48 @@
+#searchform{
+    width: 100%;
+    height: 100%;
+}
+.add-participants{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    word-wrap: break-word;
+    flex-flow:row wrap;
+}
+.selected{
+    padding: 5px 10px;
+    border-radius: 27px;
+    display: inline-block;
+    letter-spacing: 1.3px;
+    color: #243b4a;
+    border: 2px solid #0a2342;
+    margin: 0px 7px 8px 0px;
+}
+.selected-name{
+    margin-top: 1px;
+    margin-left: 3px;
+    font-size: 12px;
+}
+.selected i{
+    color: rgba(0, 0, 0 , 0.6);
+    font-size: 13px;
+}
+.delicon{
+    width: 19px;
+    height: 19px;
+    background: rgba(49, 32, 32, 0.3) !important;
+    border-radius: 50%;
+    line-height: 17px;
+}
+.btncreate{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    background: #0a2342;
+    bottom: 0;
+    line-height: 40px;
+    font-size: 22px;
+    color: white;
+    padding: 7px 0px;
+}

@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Email</title>
+    <link rel="stylesheet" href="{% static 'css/confirm.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli" />
+
+</head>
+<body>
+    <div class="head">
+        Confirm Email
+    </div>
+    <form action="{% url 'ConfirmEmailView' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name = 'code' placeholder="Enter Code"><br>
+        <button type="submit">Continue</button>
+        <div class="err">{{msg}}</div>
+    </form>
+</body>
+<script>
+    window.addEventListener( "pageshow", function ( event ) {
+        var historyTraversal = event.persisted || 
+                                ( typeof window.performance != "undefined" && 
+                                    window.performance.navigation.type === 2 );
+        if ( historyTraversal ) {
+            // Handle page restore.
+            window.location.pathname = '/main/'
+        }
+    });
+</script>
+</html>

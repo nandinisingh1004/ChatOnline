@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Muli" />
+    <link rel="stylesheet" href="{% static 'css/personalchat.css' %}">
+    <title>GroupChat</title>
+</head>
+<body>
+    <nav class="navbar bg-custom navbar-expand-xs fixed-top navbar-default">
+        <div class="hamburger d-flex">
+            <svg class="arrow-left" width="2.2em" height="2.2em" viewBox="0 0 16 16" class="bi bi-arrow-left-short" fill="#fff">
+                <path fill-rule="evenodd" d="M7.854 4.646a.5.5 0 0 1 0 .708L5.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+                <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h6.5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            <span class="user-icon">
+                {% if pic == '-'%}
+                <div class="rounded-circle"></div>
+                {% else %}
+                    <img class="rounded-circle" src={{pic}}>
+                {% endif %}
+            </span>
+            <div class="brand">{{actual}}</div>
+        </div>
+        
+            <div class="headicons">
+                <div class="dropdown">
+                    
+                        <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="dots" fill="#fff" data-toggle = 'dropdown' aria-haspopup="true" aria-expanded="false">
+                            <path fill-rule="evenodd" d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                          </svg>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item participants" type="button" >Participants</button>
+                        
+                    </div>
+                </div>
+            </div>
+    </nav>
+    <div class="message-store">
+        <div class="msg-input-div">
+            <div class="msg-send-box">
+                <div class="emoji">
+                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="#000">
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path fill-rule="evenodd" d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683z"/>
+                        <path d="M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                      </svg>
+                </div>
+                <div style="display: inline-block; width: 80%;">
+                    <input type="text" class="msg-send" placeholder="Type here..." id = "msg-input">
+                </div>
+                
+                <form action = "{%url 'GroupView' groupname %}" id = "imageformupload" method="POST" enctype="multipart/form-data" class="imageform">
+                    {% csrf_token %}
+                    <label for="imagesent" class="send">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="#000">
+                            <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                            <path fill-rule="evenodd" d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                          </svg>                      </label>
+                    <input type='file' id="imagesent" accept="image/*" name = "image" class="imageupload"/>
+                </form>
+                <svg class="send" id = "msg-submit" width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-chat-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M14 0a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+                </svg>            </div>
+        </div>
+        
+        <div class="message-body" id = "msg-body">
+            {% if len == 0 %}
+                <div></div>
+            {% else %}
+                {% for i in chats %}
+                    {% if i.sender.username == request.user.username %}
+                        {% if i.msgtype == 1 %}
+                            <div class="message-wrap-three-dots-user d-flex flex-row-reverse">
+                                <div class="message-wrap-with-icon-user d-flex flex-row-reverse">
+                                    <div class="message-wrap-user">
+                                        {{i.chats}}
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="message-wrap-three-dots-user d-flex flex-row-reverse">
+                                <div class="message-wrap-with-icon-user d-flex flex-row-reverse">
+                                    <div class="image-wrap-user d-flex flex-row-reverse">
+                                        <div class="imagemsg">
+                                            <img src="{{i.path_image}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        {% if i.msgtype == 1 %}
+                            <div class="message-wrap-three-dots">
+                                <div class="message-wrap-with-icon">
+                                    <div class="message-wrap">
+                                        {{i.chats}}
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="message-wrap-three-dots">
+                                <div class="message-wrap-with-icon">
+                                    <div class="image-wrap">
+                                        <div class="imagemsg">
+                                            <img src="{{i.path_image}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>    
+    <script>
+        $(document).ready(function(){
+            window.addEventListener( "pageshow", function ( event ) {
+                var historyTraversal = event.persisted || 
+                                        ( typeof window.performance != "undefined" && 
+                                            window.performance.navigation.type === 2 );
+                if ( historyTraversal ) {
+                    // Handle page restore.
+                    window.location.reload();
+                }
+            });
+            const groupname = "{{groupname|escapejs}}"
+            $(".arrow-left").click(function(){
+                window.location.pathname = '/main/';
+            })
+            $(".participants").click(function(){
+                window.location.pathname = '/groups/' + groupname + '/participants/';
+            })
+            $(".groupinfo").click(function(){
+                window.location.pathname = '/groups/' + groupname + '/info/';
+            })
+            var i = 0;
+            var me = "{{user|escapejs}}"
+            var msgbox = $(".message-body");
+            const socket = new WebSocket("ws://" + window.location.host + "/ws/chat/" + groupname + "/");
+            var username = "{{user|escapejs}}"
+            socket.onmessage = function(e){
+                const data = JSON.parse(e.data);
+                
+                if(data.msg_type === 1){
+                    if(data.sender == me){
+                        msgbox.append(
+                            '<div class="message-wrap-three-dots-user d-flex flex-row-reverse"><div class="message-wrap-with-icon-user d-flex flex-row-reverse"><div class="message-wrap-user">' + data.message + '</div></div></div>'
+                        );
+                    }
+                    else{
+                        msgbox.append(
+                            '<div class="message-wrap-three-dots"><div class="message-wrap-with-icon"><div class="message-wrap">' + data.message + '</div></div></div>'
+                        );
+                    }
+                    var box = document.getElementById("msg-body");
+                    box.scrollTop = msgbox.scrollHeight;
+                }
+                else{
+                    if(data.sender == me){
+                        msgbox.append(
+                            '<div class="message-wrap-three-dots-user d-flex flex-row-reverse"><div class="message-wrap-with-icon-user d-flex flex-row-reverse"><div class="image-wrap-user d-flex flex-row-reverse"><div class="imagemsg"><img src="#" class="imageuploaded" ></div></div></div></div>'
+                        );
+                        $($(".imageuploaded")[i]).attr('src', data.message);
+                        i++;
+                    }
+                    else{
+                        msgbox.append(
+                            '<div class="message-wrap-three-dots"><div class="message-wrap-with-icon"><div class="image-wrap"><div class="imagemsg"><img src="#" class="imageuploaded" ></div></div></div></div>'
+                        );
+                        $($(".imageuploaded")[i]).attr('src', data.message);
+                        i++;
+                    }
+                    var box = document.getElementById("msg-body");
+                    box.scrollTop = msgbox.scrollHeight;
+                }
+            }
+            socket.onclose = function(e){
+                console.error("Chat Socket closed unexpectedly");
+            }
+
+            $("#msg-input").focus();
+            $("#msg-input").keyup(function(e){
+                if(e.keyCode === 13){
+                    $("#msg-submit").click();
+                }
+            });
+            $("#msg-submit").click(function(e){
+                const messageDOM = $("#msg-input");
+                const message = messageDOM.val();
+                
+                socket.send(JSON.stringify({
+                    'message' : message,
+                    'type' : 1
+                }));
+                messageDOM.val('');
+            });
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie != '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                        // Only send the token to relative URLs i.e. locally.
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                }
+            });
+            var sendimage;
+            $('input[type="file"]').change(function(e){
+                var file = e.target.files;
+                sendimage = file[0];
+                console.log(sendimage)
+                if (file && file[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        // $(".message-body").append(
+                        //     '<div class="message-wrap-three-dots-user d-flex flex-row-reverse"><div class="message-wrap-with-icon-user d-flex flex-row-reverse"><div class="image-wrap-user d-flex flex-row-reverse"><div class="imagemsg"><img src="#" class="imageuploaded" ></div></div></div></div>'
+                        // );
+                        // $($(".imageuploaded")[i]).attr('src', e.target.result);
+                        // i++;
+                        console.log("yo")
+                        $("#imageformupload").submit();
+                    }
+                    reader.readAsDataURL(file[0]);
+                }
+            });
+            var submitHandler = function(event) {
+                event.preventDefault();
+                var form_data = new FormData();
+                form_data.append('data', sendimage);
+
+                for (var key of form_data.entries()) {
+                    console.log(key[0] + ', ' + key[1]);
+                }
+                $.ajax({
+                    url: "{% url 'GroupView' groupname %}",
+                    type: 'POST',
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    cache : false,
+                    success: function (response) {
+                        console.log(response)
+                        if(response.error){
+                            console.log("Something wrong in view");
+                        }
+                        else{
+                            socket.send(JSON.stringify({
+                                'message' : response.path,
+                                'type' : 0
+                            }));
+                        }
+                    },
+                    error: function(){
+                        console.log("something bad happened");
+                    },
+                    cache: false
+                    
+                });
+            };
+
+        $(document).on('submit','#imageformupload', submitHandler);
+        });
+    </script>
+</body>
+</html>

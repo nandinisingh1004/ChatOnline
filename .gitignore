@@ -1,0 +1,9 @@
+media 2/
+media/
+main/__pycache__
+usergroups/__pycache__
+users/__pycache__
+main/migrations/
+usergroups/migrations/
+users/migrations/
+db.sqlite3

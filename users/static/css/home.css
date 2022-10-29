@@ -1,0 +1,136 @@
+body{
+    font-family: 'Muli', sans-serif;
+    
+}
+.bg-custom{
+    background-color: #0a2342;
+    height: 72px;
+    z-index: 0;
+}
+.brand{
+    color: white;
+    font-size: 22px;
+    display: inline-block;
+    margin-left: 17px;
+}
+.headicons{
+    display: inline-block;
+    color: white;
+    z-index: 100;
+}
+.bars{
+    display: inline;
+}
+.fa-bars{
+    font-size: 29px !important;
+    color: white;
+}
+.fa-arrow-left{
+    font-size: 23px !important;
+    color: white;
+}
+.hamburger{
+    display: inline;
+}
+
+.sidebar{
+    z-index: 999;
+    height: 100% !important;
+    width: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #0a2342;
+    transition: .5s ease;
+}
+.sidebar-panel{
+    width: 100%;
+    white-space: nowrap;
+    padding: 0;
+}
+.userinformation{
+    background: #0a2330 !important;
+    width: 100%;
+    color: #fff;
+    padding: 24px 4px 20px 13px;
+    border-bottom: 1px solid #fff;
+}
+.username{
+    font-size: 22px;
+    color: #fff;
+    font-weight: 590;
+    margin-top: 10px;
+}
+.email-sidebar{
+    font-size: 12px;
+    color: #fff;
+    padding-top: 7px;
+}
+.utilities{
+    margin-top: 22px;
+    padding-left: 9px;
+}
+.options{
+    padding: 8px 7px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+}
+.user-profile{
+    padding: 19px 15px 10px 0px;
+    margin-bottom: 10px;
+}
+.user{
+    height: 59px;
+    width: 59px;
+    background-color: #2d4654;
+    font-size: 20px;
+    border-radius: 50%;
+    color: white;
+    line-height: 59px;
+}
+/* sidebar designing end */
+
+/* chats section styling before any chats */
+.chats{
+    position: absolute;
+    width: 100%;
+    top:50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.icon{
+    font-size: 5rem !important;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.nofriends{
+    font-size: 1.3rem;
+    color: rgba(0, 0, 0, 0.4);
+    margin-bottom: 10px;
+}
+
+button{
+    outline: none !important;
+    background: transparent !important;
+    border: none !important;
+    /* background: #09212e !important; */
+    background: #283e4a !important;
+    color: white;
+    margin: 10px;
+    padding: 10px;
+    font-size: 19px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    font-weight: 600;
+    transform: translateZ(12px);
+    box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+}
+.invite, .search{
+    width: 100px;
+}
+
+/* chats section styling end */

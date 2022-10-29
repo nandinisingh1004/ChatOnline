@@ -1,0 +1,106 @@
+.message-box{
+    width: 100% !important;
+    height: calc(100vh - 75px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top:72px;
+}
+/* messages listing styling */
+.messages{
+    width: 100%;
+    padding: 10px 0px 2px 17px;
+    height: 95px;
+    position: relative;
+}
+.user-icon img, .user-icon{
+    width: 67px;
+    height: 67px;
+    border-radius: 50%;
+    margin-right:  15px;
+    margin-top: 4px;
+}
+.additional{
+    background-color: #e8e8e8;
+}
+.group-icon img, .group-icon{
+    width: 67px;
+    height: 67px;
+    border-radius: 50%;
+    margin-right:  15px;
+    margin-top: 4px;
+}
+@media screen and (max-width : 425px){
+    .user-data{
+        width: 100%;
+        padding-left: 3px;
+        padding-top: 7px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        height: 100%;
+    }
+    .group-data{
+        width: 100%;
+        padding-left: 3px;
+        padding-top: 7px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        height: 100%;
+    }
+}
+@media screen and (min-width : 430px){
+    .user-data{
+        width: 100%;
+        padding-left: 0px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        height: 100%;
+        /* border: 2px solid blue; */
+    }
+    .group-data{
+        width: 100%;
+        padding-left: 0px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        height: 100%;
+        /* border: 2px solid blue; */
+    }
+}
+.user-name{
+    letter-spacing: 0.4px;
+    font-size: 20px;
+    color: #001427;
+    font-weight: 600;
+}
+.group-name{
+    letter-spacing: 0.4px;
+    font-size: 20px;
+    color: #001427;
+    font-weight: 600;
+}
+.lastmsg{
+    letter-spacing: 0.2px;
+    margin-top: 1px;
+    overflow-x: hidden;
+    height: 27px;
+}
+.lasttime{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 14px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+.duemsg{
+    position: absolute;
+    top: 50%;
+    right: 4%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.pending{
+    height: 22px;
+    width: 22px;
+    background-color: #4c9a21;
+    font-size: 13px;
+    border-radius: 50%;
+    color: white;
+    line-height: 22px;
+}
+/* messages listing styling end */

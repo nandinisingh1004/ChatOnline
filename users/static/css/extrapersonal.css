@@ -1,0 +1,59 @@
+body{
+    background: #fff !important;
+}
+.done{
+    font-size: 23px;
+    margin: 40px;
+}
+.form-extra{
+    width: 80%;
+    margin: auto;
+}
+.extra{
+    margin-bottom: 20px !important;
+}
+button{
+    position: absolute;
+    right: 30px;
+    bottom: 40px;
+    outline: none !important;
+    border: none !important;
+    background: #e8e8e8;
+    color: rgba(0, 0, 0, 0.5);
+    padding: 10px 17px;
+    font-size: 17px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    font-weight: 500;
+    transform: translateZ(12px);
+    box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+}
+.user-div{
+    width: 100%;
+    height: 200px;
+}
+.user-image{
+    position: relative;
+    margin: auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #e8e8e8;
+    font-size: 16px;
+}
+.imageupload{
+    display: none !important;
+}
+.userprofile{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    z-index: 100;
+}
+span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-decoration: underline;
+}

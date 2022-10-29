@@ -1,0 +1,38 @@
+body{
+    font-family: 'Muli', sans-serif;
+}
+.head{
+    margin: 40px 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+input{
+    width: 80%;
+    margin: 15px;
+    outline: 0 !important;
+    border: 0;
+    border-bottom: 1px solid #0a2342;
+    font-size: 18px;
+}
+button{
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    outline: none !important;
+    background: transparent !important;
+    border: none !important;
+    background: #07f !important;
+    color: white;
+    padding: 10px;
+    font-size: 17px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    font-weight: 500;
+    transform: translateZ(12px);
+    box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+}
+.err{
+    color: #ce1f3b;
+    font-size: 15px;
+    margin: 15px;
+}

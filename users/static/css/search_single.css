@@ -1,0 +1,99 @@
+/* form section */
+body{
+    font-family: "Muli" !important;
+}
+.search-container{
+    width: 100%;
+    margin-top: 18px;
+}
+.caption{
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.7);
+    padding-left: 18px;
+    margin-top: 13px;
+    color: #2a6405;
+}
+.iconwrap{
+    border: 1px solid rgba(0, 0, 0 , 0.2);
+    box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+    width: 95%;
+    border-radius: 5px;
+    height: 55px;
+}
+.fa-search{
+    margin-top: -2px;
+    margin-left: 8px;
+    font-size: 19px;
+    color: rgba(0, 0, 0 , 0.6);
+}
+.iconwrap input{
+    font-size: 19px;
+    width: 100%;
+    padding-left: 12px;
+    padding-top: 2px;
+    height: 100%;
+    outline: none !important;
+    background: none !important;
+    border: none !important;
+}
+.search-res::placeholder{
+    color: rgba(0, 0, 0 , 0.6);
+    font-size: 16px;
+}
+/* form section end */
+/* results section */
+.search-result{
+    width: 100% !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top:22px;
+}
+.user-name{
+    letter-spacing: 0.4px;
+    font-size:18px;
+    color: #001427;
+    font-weight: 500;
+
+}
+.results{
+    width: 100%;
+    padding: 10px 0px 2px 17px;
+    height: 80px;
+    position: relative;
+}
+.user-icon img, .user-icon{
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    margin-right:  15px;
+}
+@media screen and (max-width : 425px){
+    .user-data{
+        width: 100%;
+        padding-left: 3px;
+        padding-top: 7px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        height: 100%;
+    }
+}
+@media screen and (min-width : 430px){
+    .user-data{
+        width: 100%;
+        padding-left: 0px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        height: 100%;
+        /* border: 2px solid blue; */
+    }
+}
+.mood{
+    letter-spacing: 0.2px;
+    font-size: 15px !important;
+}
+.no-users{
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.7);
+    padding-left: 30px;
+    margin-top: 13px;
+    font-weight: 600;
+}
+/* results section end */

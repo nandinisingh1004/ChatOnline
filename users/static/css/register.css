@@ -1,0 +1,104 @@
+body{
+    font-family : 'Muli', sans-serif;
+    background: rgba(0, 0, 0, 0.04);
+}
+.welcome{
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: 490;
+    color: #0a2342;
+}
+.signup{
+    font-size: 19px;
+    font-weight: 500;
+    width: 100%;
+    color: #023e8a;
+    margin-top:0px;
+    padding-bottom: 6px;
+    margin-bottom: 34px;
+}
+.btn-signup-initial{
+    background-color: #e8e8e8;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+    font-weight: 650;
+    width: 82%;
+    height: inherit;
+    text-align: center;
+    border-radius: 4px !important;
+    outline: none !important;
+    border: none;
+    transition-timing-function: ease;
+    transition-duration: 1.3s;
+    transition-delay: 0s;
+}
+
+.input-group{
+    margin-bottom: 24px;
+    width: 100%;
+    border-radius: 10px;
+    height: 46px;
+    position: relative;
+}
+.already{
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.9);
+}
+.login{
+    text-decoration: underline;
+} 
+.form-wrapper {
+    max-width: 86%;
+    min-width: 300px;
+    padding: 36px 30px 20px 30px;
+    margin: 50px 0px 20px 0px;   
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+}
+  
+.form-group {
+    position:relative;  
+    margin-bottom: 60px;
+}
+  
+.form-label {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: #999;
+    background-color: #fff;
+    z-index: 10;
+    transition: transform 150ms ease-out, font-size 150ms ease-out;
+}
+  
+.focused .form-label {
+    transform: translateY(-125%);
+    font-size: .82em;
+    color: #007bff;
+}
+  
+.form-input {
+    position: relative;
+    padding: 12px 0px 5px 0;
+    width: 100%;
+    outline: 0;
+    border: 0;
+    box-shadow: 0 1px 0 0 #e5e5e5;
+    transition: box-shadow 150ms ease-out;
+}
+  
+.form-input .filled {
+    box-shadow: 0 2px 0 0 lightgreen;
+}
+.error-email,.error-username{
+    color: red;
+    font-size: 14px;
+    margin: 4px auto;
+    width: 100%;
+    text-align: center;
+}

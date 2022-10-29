@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Muli&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/extrapersonal.css' %}">
+</head>
+<body>
+    <div class="done text-center">
+        Almost Done !!
+    </div>
+    <div class="user-div text-center">
+        
+        <form action = "{%url 'SaveProfilePic' %}" id = "imageformupload" method="POST" enctype="multipart/form-data" class="imageform">
+            {% csrf_token %}
+            <label for="imageinput"><div class="user-image text-center"><span>Choose Profile pic</span></div></label>
+            <input type='file' id="imageinput" accept="image/*" name = "image" class="imageupload"/>
+        </form>
+    </div>
+    <div class="form-extra">
+        <form action="{% url 'SaveProfilePic' %}" method = "POST" class="form" novalidate>
+            {% csrf_token %}
+            <div class="form-group extra">
+                <label class="form-label" for="first">First Name</label>
+                <input id="first" autocomplete="off" class="form-input" type="text" name = 'first' required/>
+            </div>
+            <div class="form-group extra">
+                <label class="form-label" for="last">Last Name</label>
+                <input id="last" class="form-input" type="text" name='last' required/>
+            </div>
+            <button type="submit" class="btn-done">Done</button>
+        </form>
+    </div>
+    <script>
+
+        $('input').focus(function(){
+            $(this).parents('.form-group').addClass('focused');
+        });
+
+        $('input').blur(function(){
+        var inputValue = $(this).val();
+        if ( inputValue == "" ) {
+            $(this).parents('.form-group').removeClass('focused');
+            $(this).removeClass('filled');
+        } else {
+            $(this).addClass('filled');
+        }
+        });
+
+    </script>
+    <script>
+        window.addEventListener( "pageshow", function ( event ) {
+            var historyTraversal = event.persisted || 
+                                    ( typeof window.performance != "undefined" && 
+                                        window.performance.navigation.type === 2 );
+            if ( historyTraversal ) {
+                // Handle page restore.
+                window.location.pathname = '/main/'
+            }
+        });
+        var check1 = false;
+        var check2 = false;
+        var formSignup = $('.form');
+        $(".form-input").keyup(function(){
+            var identify = $(this).attr("id");
+            if(identify === "first"){
+                if($(this).val().length != ''){
+                    $(this).css({"box-shadow" : "0 1px 0 0 #ce1f3b"});
+                    check1 = false;
+                }
+                else{
+                    $(this).css({"box-shadow" : "0 1px 0 0 #4c9a2a"});
+                    check1 = true;
+                }
+            }
+            else if(identify === "last"){
+                if($(this).val().length != ''){
+                    $(this).css({"box-shadow" : "0 1px 0 0 #ce1f3b"});
+                    check2 = false;
+                }
+                else{
+                    $(this).css({"box-shadow" : "0 1px 0 0 #4c9a2a"});
+                    check2 = true;
+                }
+            }
+            if(check1 === true && check2 === true){
+            
+                $("button").css({"background-color" : "#007bff", "color" : '#fff'});
+                
+            }
+            else{
+                $("button").css({'background-color' : "#e8e8e8", "color" : "rgba(0, 0, 0, 0.5)"});
+            }
+        });
+
+        formSignup.submit(function(event){
+            if(check1 === false || check2 === false){
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            else{
+                console.log("Worked");
+            }
+        });
+        
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                    // Only send the token to relative URLs i.e. locally.
+                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                }
+            }
+        });
+
+        var sendimage;
+        $('input[type="file"]').change(function(e){
+            var file = e.target.files;
+            sendimage = file[0];
+            console.log(sendimage)
+            if (file && file[0]) {
+                var reader = new FileReader();
+                reader.onload = function (ev) {
+                    $("span").remove();
+                    console.log("yo");
+                    $(".userprofile").remove();
+                    $('.user-image').append(
+                        '<img src = "#" class="userprofile">'
+                    )
+                    $(".userprofile").attr("src", ev.target.result);
+                    $("#imageformupload").submit();
+                }
+                reader.readAsDataURL(file[0]);
+            }
+        });
+
+        var submitHandler = function(event) {
+            event.preventDefault();
+            var form_data = new FormData();
+            form_data.append('data', sendimage);
+            $.ajax({
+                url: "{% url 'SaveProfilePic' %}",
+                type: 'POST',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                cache : false,
+                success: function (response) {
+                    console.log(response)
+                    if(response.error){
+                        console.log("Something wrong in view");
+                    }
+                    else{
+                        console.log("it worked")
+                    }
+                },
+                error: function(){
+                    console.log("something bad happened");
+                },
+                cache: false
+                
+            });
+        };
+
+        $(document).on('submit','#imageformupload', submitHandler);
+        
+    </script>
+</body>
+</html>
