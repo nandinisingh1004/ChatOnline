@@ -7,3 +7,4 @@ main/migrations/
 usergroups/migrations/
 users/migrations/
 db.sqlite3
+
